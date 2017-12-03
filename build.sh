@@ -31,7 +31,7 @@ git add .xxx-build-ref
 git commit -m 'Updated Build Ref'
 
 git remote add arm-build $RESIN_REPO
-git push arm-build $GIT_BRANCH:master -f
+git push arm-build $BRANCH:master -f
 
 # Get the last commit id - this is used as the docker image name at resin.io
 COMMIT=$(git rev-parse HEAD)

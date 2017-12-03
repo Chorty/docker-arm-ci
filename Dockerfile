@@ -4,7 +4,6 @@ RUN apk add --no-cache curl git openssh-client jq
 
 COPY build.sh /build.sh
 
-ENV RESIN_REGISTRY=registry.resin.io 
-  GIT_BRANCH=master
+ENV RESIN_REGISTRY=registry.resin.io
 
 CMD ["/build.sh"]
