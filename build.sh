@@ -36,7 +36,7 @@ COMMIT=$(git rev-parse HEAD)
 docker pull registry.resin.io/$RESIN_PROJECT/$COMMIT
 
 # Tag the image
-docker tag registry.resin.io/$RESIN_PROJECT/$COMMIT $TARGET_REGISTRY/$TARGET_IMAGE
+docker tag registry.resin.io/$RESIN_PROJECT/$COMMIT $TARGET_IMAGE
 
 echo "Pushing new image: $TARGET_IMAGE"
 
