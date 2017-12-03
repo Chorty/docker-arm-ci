@@ -4,6 +4,6 @@ RUN apk add --no-cache curl git openssh-client jq
 
 COPY build.sh /build.sh
 
-ENV RESIN_REGISTRY=registry.resin.io
+ENV RESIN_REGISTRY=registry.resin.io TARGET_IMAGE_TAG=latest
 
 CMD ["/build.sh"]
