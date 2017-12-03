@@ -2,6 +2,9 @@
 
 set -e
 
+# Save resin ssh key
+mkdir -p ~/.ssh && echo "$RESIN_PRIVATE_KEY" > ~/.ssh/id_rsa && chmod 400 ~/.ssh/id_rsa
+
 # Set environment variables
 export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa"
 export RESIN_PROJECT=$(echo "$RESIN_REPO" | awk -F '/' '{ print $2 }' | awk -F '.git' '{ print $1 }')
@@ -9,9 +12,9 @@ export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRAN
 
 echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
 
-# Login to target registry
-docker login $TARGET_REGISTRY --username "$TARGET_REGISTRY_USERNAME" --password "$TARGET_REGISTRY_PASSWORD"
-docker login "$RESIN_REGISTRY" --username "$RESIN_REGISTRY_USERNAME" --password "$RESIN_API_KEY"
+# Login to docker registry
+docker login --username "$DOCKER_USERNAME" --password "$DOCKER_PASSWORD"
+docker login "$RESIN_REGISTRY" --username "$RESIN_USERNAME" --password "$RESIN_API_KEY"
 
 # Prep build dir
 rm -rf /build
