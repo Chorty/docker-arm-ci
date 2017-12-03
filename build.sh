@@ -7,7 +7,7 @@ export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChec
 export RESIN_PROJECT=$(echo "$RESIN_REPO" | awk -F '/' '{ print $2 }' | awk -F '.git' '{ print $1 }')
 
 # Login to target registry
-docker login "$TARGET_REGISTRY" --username "$TARGET_REGISTRY_USERNAME" --password "$TARGET_REGISTRY_PASSWORD"
+docker --username "$TARGET_REGISTRY_USERNAME" --password "$TARGET_REGISTRY_PASSWORD"
 docker login "$RESIN_REGISTRY" --username "$RESIN_REGISTRY_USERNAME" --password "$RESIN_API_KEY"
 
 # Prep build dir
