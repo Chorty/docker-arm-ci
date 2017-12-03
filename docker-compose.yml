@@ -4,7 +4,7 @@ services:
     build: .
     volumes:
       - "${TRAVIS_BUILD_DIR}:/source"
-      - "${TRAVIS_BUILD_DIR}/resin.key:/root/.ssh/id_rsa"
+      - "./resin.key:/root/.ssh/id_rsa"
       - "/var/run/docker.sock:/var/run/docker.sock"
     environment:
       - TARGET_REGISTRY=${TARGET_REGISTRY}
