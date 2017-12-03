@@ -1,0 +1,17 @@
+version: "2"
+services:
+  arm-build:
+    build: .
+    volumes:
+      - "${TRAVIS_BUILD_DIR}:/source"
+      - "${TRAVIS_BUILD_DIR}/resin.key:/root/.ssh/id_rsa"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    environment:
+      - TARGET_REGISTRY=${TARGET_REGISTRY}
+      - TARGET_REGISTRY_USERNAME=${TARGET_REGISTRY_USERNAME}
+      - TARGET_REGISTRY_PASSWORD=${TARGET_REGISTRY_PASSWORD}
+      - TARGET_IMAGE=${TARGET_IMAGE}
+      - RESIN_REGISTRY=${RESIN_REGISTRY}
+      - RESIN_REGISTRY_USERNAME=${RESIN_REGISTRY_USERNAME}
+      - RESIN_API_KEY=${RESIN_API_KEY}
+      - RESIN_REPO=${RESIN_REPO}
