@@ -3,7 +3,7 @@
 set -e
 
 # Save resin ssh key
-mkdir -p ~/.ssh && echo "$RESIN_PRIVATE_KEY" | base64 -D > ~/.ssh/resin && chmod 400 ~/.ssh/resin
+mkdir -p ~/.ssh && echo "$RESIN_PRIVATE_KEY" | base64 -d > ~/.ssh/resin && chmod 400 ~/.ssh/resin
 
 # Set environment variables
 export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ~/.ssh/resin"
