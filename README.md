@@ -41,3 +41,8 @@ The `RESIN_PRIVATE_KEY` variable should your unencrypted resin ssh private key e
 travis env set --private RESIN_PRIVATE_KEY $(cat ~/.ssh/resin.io | base64 -i -)
 ```
 
+The `RESIN_API_KEY` can be generated from the auth-token in your Resin.io preferences panel:
+
+```
+curl -H 'Authorization: Bearer AUTH_TOKEN' -X POST https://api.resin.io/application/NNNN/generate-api-key
+```
