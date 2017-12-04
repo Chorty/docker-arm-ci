@@ -8,9 +8,6 @@ mkdir -p ~/.ssh && echo "$RESIN_PRIVATE_KEY" | base64 -d > ~/.ssh/resin && chmod
 # Set environment variables
 export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ~/.ssh/resin"
 export RESIN_PROJECT=$(echo "$RESIN_REPO" | awk -F '/' '{ print $2 }' | awk -F '.git' '{ print $1 }')
-export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
-
-echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
 
 # Login to docker registry
 docker login --username "$DOCKER_USERNAME" --password "$DOCKER_PASSWORD"
@@ -28,13 +25,12 @@ git config user.name $GIT_USERNAME
 git config user.email $GIT_EMAIL
 
 # Create a new revision, this forces resin.io to do a new build
-git checkout $BRANCH
 echo $(git rev-parse HEAD) > .xxx-build-ref
 git add .xxx-build-ref
 git commit -m 'Updated Build Ref'
 
 git remote add arm-build $RESIN_REPO
-git push arm-build $BRANCH:master -f
+git push arm-build $TRAVIS_BRANCH:master -f
 
 # Get the last commit id - this is used as the docker image name at resin.io
 COMMIT=$(curl -s -H "Content-Type: application/json" \
