@@ -40,6 +40,12 @@ git push arm-build $BRANCH:master -f
 COMMIT=$(curl -s -H "Content-Type: application/json" \
     "https://api.resin.io/v1/application?\$filter=app_name%20eq%20'$RESIN_PROJECT'&apikey=$RESIN_API_KEY" | jq -r '.d[0].commit')
 
+# Check to see if we need to push the image to Docker Hub
+if [ "$TARGET_IMAGE_TAG" = "" ] || [ -z "$TARGET_IMAGE_TAG" ]; then
+    echo "Not pushing image to Docker Hub"
+    exit 0
+fi
+
 # Pull the image from resin.io
 docker pull registry.resin.io/$RESIN_PROJECT/$COMMIT
 
