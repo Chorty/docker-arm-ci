@@ -37,7 +37,8 @@ git remote add arm-build $RESIN_REPO
 git push arm-build $BRANCH:master -f
 
 # Get the last commit id - this is used as the docker image name at resin.io
-COMMIT=$(git rev-parse HEAD)
+COMMIT=$(curl -s -H "Content-Type: application/json" \
+    "https://api.resin.io/v1/application?\$filter=app_name%20eq%20'$RESIN_PROJECT'&apikey=$RESIN_API_KEY" | jq -r '.d[0].commit')
 
 # Pull the image from resin.io
 docker pull registry.resin.io/$RESIN_PROJECT/$COMMIT
