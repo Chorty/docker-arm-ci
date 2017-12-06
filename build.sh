@@ -19,10 +19,8 @@ cp -R /source /build
 cd /build
 
 # Login to git
-GIT_USERNAME=$(git log --format='%an' HEAD^..HEAD)
-GIT_EMAIL=$(git log --format='%ae' HEAD^..HEAD)
-git config user.name $GIT_USERNAME
-git config user.email $GIT_EMAIL
+git config user.name travis
+git config user.email travis@example.com
 
 # Create a new revision, this forces resin.io to do a new build
 echo $(git rev-parse HEAD) > .xxx-build-ref
