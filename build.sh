@@ -1,5 +1,13 @@
 #!/bin/sh
 
+# start docker in docker
+dockerd &
+
+until docker info >/dev/null 2>&1; do
+    echo "Waiting for docker to be available..."
+    sleep 1
+done
+
 set -e
 
 # Save resin ssh key

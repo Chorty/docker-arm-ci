@@ -2,6 +2,7 @@ version: "2"
 services:
   arm-build:
     build: .
+    privileged: true
     volumes:
       - "${TRAVIS_BUILD_DIR}:/source"
       - "/var/run/docker.sock:/var/run/docker.sock"
