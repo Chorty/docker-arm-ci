@@ -11,7 +11,7 @@ services:
 before_install:
   - git clone https://github.com/oznu/docker-arm-ci.git ~/docker-arm-ci
 
-before_scripts:
+before_script:
   - export TARGET_IMAGE_TAG=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then if [ "$TRAVIS_BRANCH" = "master" ]; then echo "armhf"; else echo "$TRAVIS_BRANCH-armhf"; fi; else echo ""; fi)
 
 script:
