@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # start docker in docker
-dockerd &
+dockerd >/dev/null 2>&1 &
 
 until docker info >/dev/null 2>&1; do
     echo "Waiting for docker to be available..."
